@@ -1,5 +1,8 @@
 const express = require('express');
 
+const initiativeRoutes = require('./routes/initiative-routes');
+const signatureRoutes = require('./routes/signature-routes');
+
 const HttpError = require('./models/http-error');
 
 const app = express();

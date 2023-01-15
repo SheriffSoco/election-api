@@ -9,3 +9,5 @@ router.get("/:iid", signatureControllers.getSignatureCount);
 router.post("/:iid", signatureControllers.addSignature);
 
 router.delete("/:iid", signatureControllers.removeSignature);
+
+module.exports = router;
