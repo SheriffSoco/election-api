@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const initiativeRoutes = require('./routes/initiative-routes');
 const signatureRoutes = require('./routes/signature-routes');
@@ -6,6 +7,8 @@ const signatureRoutes = require('./routes/signature-routes');
 const HttpError = require('./models/http-error');
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use('/api/initiative', initiativeRoutes);
 

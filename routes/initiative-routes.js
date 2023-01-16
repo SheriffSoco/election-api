@@ -1,10 +1,11 @@
 const express = require("express");
+const { check, body } = require("express-validator");
 
 const initiativeControllers = require("../controllers/initiative-controllers");
 
 const router = express.Router();
 
-router.get("/notes/get-all/:iid", initiativeControllers.getNotesForInitiative);
+router.get("/notes/:iid", initiativeControllers.getNotesForInitiative);
 
 router.get("/notes/:iid/:nid", initiativeControllers.getNote);
 
@@ -15,14 +16,25 @@ router.delete(
   initiativeControllers.deleteNoteFromInitiative
 );
 
-router.get("/:id", initiativeControllers.getInitiative);
+router.get("/:iid", initiativeControllers.getInitiative);
 
 router.get("/", initiativeControllers.getInitiativeList);
 
-router.post("/", initiativeControllers.createInitiative);
+router.post(
+  "/",
+  [check("subject").not().isEmpty(), check("ballotTitle").not().isEmpty()],
+  initiativeControllers.createInitiative
+);
 
-router.patch("/:id", initiativeControllers.updateInitiative);
+router.patch(
+  "/:iid",
+  [
+    check("subject").optional().notEmpty(),
+    check("ballotTitle").optional().notEmpty(),
+  ],
+  initiativeControllers.updateInitiative
+);
 
-router.delete("/:id", initiativeControllers.deleteInitiative);
+router.delete("/:iid", initiativeControllers.deleteInitiative);
 
 module.exports = router;
